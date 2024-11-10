@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <form method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" name="name" id="name"><br><br>
+
+        <label for="age">Age:</label><br>
+        <input type="number" name="age" id="age"><br><br>
+
+        <label for="location">Location:</label><br>
+        <input type="text" name="location" id="location"><br><br>
+
+        <label>Interests:</label><br>
+        {% for interest in interests_options %}
+            <input type="checkbox" name="interests" value="{{ interest }}"> {{ interest }}<br>
+        {% endfor %}
+        <br>
+
+        <label>Connection Preference:</label><br>
+        <input type="radio" name="connection_type" value="Casual"> Casual<br>
+        <input type="radio" name="connection_type" value="Intensive"> Intensive<br>
+        <input type="radio" name="connection_type" value="Digital"> Digital<br><br>
+
+        <input type="submit" value="Sign Up">
+    </form>
+</body>
+</html>
