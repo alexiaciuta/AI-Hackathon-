@@ -25,16 +25,16 @@ form {
 .interests-column {
     width: 30%;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 0px;
 }
 
 .interests-column label {
     display: block;
-    font-size: 10px;
+    font-size: 14px;
 }
 
 .button-container {
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .button {
@@ -43,13 +43,13 @@ form {
     margin: 10px;
     font-size: 16px;
     color: white;
-    background-color: #d2ed82; 
+    background-color: #4ba83c; 
     text-decoration: none;
     border-radius: 5px;
 }
 
 .button:hover {
-    background-color: #acc269;
+    background-color: #448f39;
 }
 
 h1 {
@@ -66,6 +66,7 @@ body {
 
 input {
     margin-bottom: 0px;
+    padding : 0px
 }
 
 /* Ensure columns are responsive on smaller screens */

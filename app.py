@@ -172,7 +172,7 @@ def get_all_people() -> List[Tuple[str, Set[str]]]:
     people_list = []
     for user in all_users:
         # Split the interests string into a set of interests
-        interests = set(interest.strip() for interest in user.interests.split(',') if interest.strip())
+        interests = set(interest.strip().lower() for interest in user.interests.split(',') if interest.strip())
         people_list.append((user.name, interests))
     return people_list
 
@@ -193,17 +193,21 @@ def matching():
     target_user = current_user
     result = find_closest_match(target_user)
     if result:
-        closest_person_name, similarity_score = result
-        message = f"Your closest match is {closest_person_name} with a similarity score of {similarity_score:.2f}."
+        matched_user, similarity_score = result
+        current_user.points += 5
+        # Commit the changes to the database
+        db.session.commit()
+        message = f"Congratulations! You've matched with {matched_user.name} and earned 5 points!"
+        return render_template('matching.html', user=current_user, matched_user=matched_user, message=message)
     else:
         message = "No matches found."
+        return render_template('matching.html', user=current_user, message=message)
 
-    return render_template('matching.html', user=current_user, message=message)
 
 
 def find_closest_match(target_user: User) -> Optional[Tuple[str, float]]:
     people = get_all_people()
-    target_interests = set(interest.strip() for interest in target_user.interests.split(',') if interest.strip())
+    target_interests = set(interest.strip().lower() for interest in target_user.interests.split(',') if interest.strip())
     max_similarity = 0.0
     closest_person = None
 
@@ -214,7 +218,7 @@ def find_closest_match(target_user: User) -> Optional[Tuple[str, float]]:
         similarity = jaccard_similarity(target_interests, interests)
         if similarity > max_similarity:
             max_similarity = similarity
-            closest_person = name
+            closest_person = User.query.filter_by(name=name).first()
 
     if closest_person:
         return closest_person, max_similarity
