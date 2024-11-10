@@ -13,7 +13,9 @@ def signup():
         # For now, we'll just display a thank you message with the user's name
         return f"Thank you for signing up, {name}!"
 
-    interests_options = ['Music', 'Sports', 'Reading', 'Traveling', 'Gaming']
+    interests_options = ['Football', 'Sailing', 'Rugby', 'Tennis', 'Pilates', 'Swimming', 'Hiking', 'Sports', 'Cycling', 'Running', 'Nature', 'Gardening', 'Crafts', 
+                         'Reading', 'Cooking/Baking', 'Video Games', 'Board games', 'Chess', 'Card Games', 'Music', 'Dance', 'Art', 'Theatre & film', 
+                         'Visiting museums', 'Travelling']
     return render_template('signup.html', interests_options=interests_options)
 
 if __name__ == '__main__':
