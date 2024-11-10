@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rewards</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Rewards</h1>
+    <p>You have {{ user.points }} points.</p>
+
+    {% if message %}
+        <p style="color: green;">{{ message }}</p>
+    {% endif %}
+
+    <form method="post">
+        <table border="1" cellpadding="5" cellspacing="0" style="margin: auto;">
+            <tr>
+                <th>Select</th>
+                <th>Reward</th>
+                <th>Points Required</th>
+            </tr>
+            {% for reward in reward_options %}
+            <tr>
+                <td>
+                    <input type="radio" name="reward" value="{{ reward.name }}" required>
+                </td>
+                <td>{{ reward.name }}</td>
+                <td>{{ reward.points }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <input type="submit" value="Redeem Reward">
+    </form>
+
+    <h2>Your Redeemed Vouchers</h2>
+    {% if user.vouchers %}
+        <table border="1" cellpadding="5" cellspacing="0" style="margin: auto;">
+            <tr>
+                <th>Voucher Type</th>
+                <th>Redeemed At</th>
+            </tr>
+            {% for voucher in user.vouchers %}
+            <tr>
+                <td>{{ voucher.voucher_type }}</td>
+                <td>{{ voucher.redeemed_at.strftime('%Y-%m-%d %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>You have not redeemed any vouchers yet.</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('home') }}">Back to Home</a> |
+    <a href="{{ url_for('logout') }}">Log Out</a>
+</body>
+</html>

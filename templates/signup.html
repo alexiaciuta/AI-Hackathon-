@@ -1,27 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sign Up</title>
+    <title>CommunityConnect</title>
+    <!-- Link the CSS file -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Sign Up</h1>
+    <h1>CommunityConnect Profile Creation</h1>
     <form method="post">
         <label for="name">Name:</label><br>
-        <input type="text" name="name" id="name"><br><br>
+        <input type="text" name="name" id="name" required><br><br>
+
+        <label for="name">Password:</label><br>
+        <input type="text" name="password" id="password" required><br><br>
 
         <label for="age">Age:</label><br>
-        <input type="number" name="age" id="age"><br><br>
+        <input type="number" name="age" id="age" required><br><br>
 
         <label for="location">Location:</label><br>
-        <input type="text" name="location" id="location"><br><br>
+        <input type="text" name="location" id="location" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="text" name="email" id="email" required><br><br>
 
         <label>Interests:</label><br>
-        {% for interest in interests_options %}
-            <input type="checkbox" name="interests" value="{{ interest }}"> {{ interest }}<br>
-        {% endfor %}
-        <br>
+        <div class="interests">
+            <div class="interests-column">
+                {% for interest in interests_options[:(interests_options|length)//3] %}
+                    <label>
+                        <input type="checkbox" name="interests" value="{{ interest }}"> {{ interest }}
+                    </label>
+                {% endfor %}
+            </div>
+            <div class="interests-column">
+                {% for interest in interests_options[(interests_options|length)//3:(interests_options|length)*2//3] %}
+                    <label>
+                        <input type="checkbox" name="interests" value="{{ interest }}"> {{ interest }}
+                    </label>
+                {% endfor %}
+            </div>
+            <div class="interests-column">
+                {% for interest in interests_options[(interests_options|length)*2//3:] %}
+                    <label>
+                        <input type="checkbox" name="interests" value="{{ interest }}"> {{ interest }}
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+    <br>
 
         <input type="submit" value="Sign Up">
     </form>
+    <br>
+        <p>Already have an account? <a href="{{ url_for('login') }}">Log In</a></p>
 </body>
 </html>
+

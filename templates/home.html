@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CommunityConnect Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Welcome, {{ user.name }}!</h1>
+    <p>You have {{ user.points }} points.</p>
+
+    <div class="button-container">
+        <a href="{{ url_for('find-a-local-friend') }}" class="button">Matching</a>
+        <a href="{{ url_for('rewards') }}" class="button">Rewards</a>
+        <a href="{{ url_for('events') }}" class="button">Events</a>
+    </div>
+
+    <br>
+    <a href="{{ url_for('logout') }}">Log Out</a>
+    
+</body>
+</html>
