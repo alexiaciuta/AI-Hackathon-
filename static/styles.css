@@ -23,22 +23,14 @@ form {
 }
 
 .interests-column {
-<<<<<<< HEAD
     width: 30%;
     box-sizing: border-box;
     padding: 10px;
-=======
-    width: 49%;
->>>>>>> bddbca2d40816434e8609970b5d56f9def90aef7
 }
 
 .interests-column label {
     display: block;
-<<<<<<< HEAD
     font-size: 10px;
-=======
-    font-size: 14px; /* Decreased font size */
->>>>>>> bddbca2d40816434e8609970b5d56f9def90aef7
 }
 
 .button-container {
@@ -51,17 +43,12 @@ form {
     margin: 10px;
     font-size: 16px;
     color: white;
-<<<<<<< HEAD
     background-color: #d2ed82; 
-=======
-    background-color: #4CAF50; /* Green */
->>>>>>> bddbca2d40816434e8609970b5d56f9def90aef7
     text-decoration: none;
     border-radius: 5px;
 }
 
 .button:hover {
-<<<<<<< HEAD
     background-color: #acc269;
 }
 
@@ -92,7 +79,4 @@ input {
     .interests-column {
         width: 100%; /* Stack columns on very small screens */
     }
-=======
-    background-color: #45a049;
->>>>>>> bddbca2d40816434e8609970b5d56f9def90aef7
 }

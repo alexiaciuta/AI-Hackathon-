@@ -4,6 +4,8 @@ import os
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required, current_user
 from datetime import datetime
+from typing import List, Set, Tuple, Optional
+import sqlite3
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Generates a random secret key
@@ -164,18 +166,16 @@ def index():
         return redirect(url_for('login'))
     
 # Creates the matching page
-@app.route('/find-a-local-friend')
-def get_all_people(db_name: str) -> List[Tuple[str, Set[str]]]:
+def get_all_people() -> List[Tuple[str, Set[str]]]:
 
     all_users = User.query.all()
-    print(type(all_users))
     people_list = []
-    interests = set([user.interests.split(',') for user in all_users])
-    print(interests)
-    print(all_users)
-    people_list.append((User.name, interests))
-
+    for user in all_users:
+        # Split the interests string into a set of interests
+        interests = set(interest.strip() for interest in user.interests.split(',') if interest.strip())
+        people_list.append((user.name, interests))
     return people_list
+
 
 def jaccard_similarity(set1: Set[str], set2: Set[str]) -> float:
     """
@@ -187,12 +187,30 @@ def jaccard_similarity(set1: Set[str], set2: Set[str]) -> float:
         return 0.0
     return len(intersection) / len(union)
 
-def find_closest_match(target_interests: Set[str], db_name: str) -> Optional[Tuple[str, float]]:
-    people = get_all_people(db_name)
+@app.route('/matching')
+@login_required
+def matching():
+    target_user = current_user
+    result = find_closest_match(target_user)
+    if result:
+        closest_person_name, similarity_score = result
+        message = f"Your closest match is {closest_person_name} with a similarity score of {similarity_score:.2f}."
+    else:
+        message = "No matches found."
+
+    return render_template('matching.html', user=current_user, message=message)
+
+
+def find_closest_match(target_user: User) -> Optional[Tuple[str, float]]:
+    people = get_all_people()
+    target_interests = set(interest.strip() for interest in target_user.interests.split(',') if interest.strip())
     max_similarity = 0.0
     closest_person = None
 
     for name, interests in people:
+        # Skip comparing the user with themselves
+        if name == target_user.name:
+            continue
         similarity = jaccard_similarity(target_interests, interests)
         if similarity > max_similarity:
             max_similarity = similarity
@@ -201,7 +219,7 @@ def find_closest_match(target_interests: Set[str], db_name: str) -> Optional[Tup
     if closest_person:
         return closest_person, max_similarity
     else:
-        return None    
+        return None
 
 # Creates the rewards page
 @app.route('/rewards', methods=['GET', 'POST'])
