@@ -26,13 +26,18 @@
         <label>Interests:</label><br>
         <div class="interests">
             <div class="interests-column">
+<<<<<<< HEAD
                 {% for interest in interests_options[:(interests_options|length)//3] %}
+=======
+                {% for interest in interests_options[:(interests_options|length)//2 + 2] %}
+>>>>>>> bddbca2d40816434e8609970b5d56f9def90aef7
                     <label>
                         <input type="checkbox" name="interests" value="{{ interest }}"> {{ interest }}
                     </label>
                 {% endfor %}
             </div>
             <div class="interests-column">
+<<<<<<< HEAD
                 {% for interest in interests_options[(interests_options|length)//3:(interests_options|length)*2//3] %}
                     <label>
                         <input type="checkbox" name="interests" value="{{ interest }}"> {{ interest }}
@@ -41,13 +46,20 @@
             </div>
             <div class="interests-column">
                 {% for interest in interests_options[(interests_options|length)*2//3:] %}
+=======
+                {% for interest in interests_options[(interests_options|length)//2 + 2:] %}
+>>>>>>> bddbca2d40816434e8609970b5d56f9def90aef7
                     <label>
                         <input type="checkbox" name="interests" value="{{ interest }}"> {{ interest }}
                     </label>
                 {% endfor %}
             </div>
         </div>
+<<<<<<< HEAD
     <br>
+=======
+        <br>
+>>>>>>> bddbca2d40816434e8609970b5d56f9def90aef7
 
         <input type="submit" value="Sign Up">
     </form>
