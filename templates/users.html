@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registered Users</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Registered Users</h1>
+    <table border="1" cellpadding="5" cellspacing="0" style="margin: auto;">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Location</th>
+            <th>Email</th>
+            <th>Interests</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.age }}</td>
+            <td>{{ user.location }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.interests }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="{{ url_for('signup') }}">Back to Sign Up</a>
+</body>
+</html>

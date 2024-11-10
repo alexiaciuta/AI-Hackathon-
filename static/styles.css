@@ -1,0 +1,32 @@
+/* styles.css */
+
+/* Center the text on the page */
+/* Center the text on the page and set font */
+body {
+    background-color: #fdf5e6; /* Cream color */
+    text-align: center;
+    /*font-family: Arial, sans-serif;*/
+}
+
+/* Center the form on the page */
+form {
+    display: inline-block;
+    text-align: left;
+    margin: auto;
+}
+
+/* Style the interests section */
+.interests {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.interests-column {
+    width: 49%;
+}
+
+.interests-column label {
+    display: block;
+    font-size: 14px; /* Decreased font size */
+}
